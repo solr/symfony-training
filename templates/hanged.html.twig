@@ -1,0 +1,15 @@
+
+{#<head>#}
+    {#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+    {#<link rel="shortcut icon" href="/favicon.ico" />#}
+{#</head>#}
+{% extends 'layout.html.twig' %}
+{%  block content %}
+    <h2>What a failure!</h2>
+
+    <p class="attempts">
+        <a href="{{ path('app_game') }}">Try again!</a>
+    </p>
+    {% dump(game) %}
+
+{% endblock %}

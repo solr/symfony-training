@@ -1,0 +1,26 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    dictionaries:
+      - '%kernel.project_dir%/assets/words.txt'
+      - '%kernel.project_dir%/assets/words.xml'
+
+services:
+
+    _defaults:
+      autowire: true
+      public: false
+
+    App\:
+      resource: '../src/*'
+      exclude: '../src/{Entity,Migrations,Tests}'
+
+    App\Controller\:
+      resource: '../src/Controller'
+      tags: ['controller.service_arguments']
+
+    App\Game\WordList:
+      calls:
+        - [addLoader, ['txt', '@App\Game\Loader\TextFileLoader']]
+        - [addLoader, ['xml', '@App\Game\Loader\XmlFileLoader']]
+        - [loadDictionaries, ['%dictionaries%']]

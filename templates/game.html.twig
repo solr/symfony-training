@@ -1,0 +1,64 @@
+
+{#<head>#}
+    {#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+    {#<link rel="shortcut icon" href="/favicon.ico" />#}
+{#</head>#}
+{% extends 'layout.html.twig' %}
+{%  block content %}
+    <h2>Guess the mysterious word</h2>
+
+    <p class="attempts">
+        You still have {{ game.remainingAttempts }} remaining attempts.
+    </p>
+    {% dump(game) %}
+    <ul class="word_letters">
+        {% for letter in game.wordLetters %}
+            {% if game.letterFound(letter) %}
+                <li class="letter guessed">
+                    {{ letter }}
+                </li>
+            {% else %}
+                <li class="letter hidden">
+                    ?
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <br class="clearfix" />
+
+    <p class="attempts">
+        <a href="{{ path('app_game_reset') }}">Reset the game</a>
+    </p>
+
+    <br class="clearfix" />
+
+    <h2>Try a letter</h2>
+
+    <ul>
+        {% for letter in 'a'..'z' %}
+            {% if letter in game.foundLetters %}
+                <li class="letter guessed">
+            {% elseif letter in game.triedLetters %}
+                <li class="letter grey">
+            {% else %}
+                <li class="letter">
+            {% endif %}
+                <a href="{{ path('app_game_letter', {letter: letter}) }}">
+                    {{ letter }}
+                </a>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <h2>Try a word</h2>
+
+    <form action="{{ path('app_game_word') }}" method="post">
+        <p>
+            <label for="word">Word:</label>
+            <input type="text" id="word" name="word"/>
+            <button type="submit">Let me guess...</button>
+        </p>
+    </form>
+{% endblock %}
