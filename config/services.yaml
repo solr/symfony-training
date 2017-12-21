@@ -4,6 +4,7 @@ parameters:
     dictionaries:
       - '%kernel.project_dir%/assets/words.txt'
       - '%kernel.project_dir%/assets/words.xml'
+    locale: 'en'
 
 services:
 

@@ -10,7 +10,6 @@
     <p class="attempts">
         You still have {{ game.remainingAttempts }} remaining attempts.
     </p>
-    {% dump(game) %}
     <ul class="word_letters">
         {% for letter in game.wordLetters %}
             {% if game.letterFound(letter) %}
