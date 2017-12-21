@@ -1,14 +1,31 @@
 security:
+    encoders:
+      App\Entity\Player: bcrypt
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        players:
+            entity:
+                class: App\Entity\Player
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
             anonymous: ~
 
+            form_login:
+              check_path: app_signin
+              login_path: app_signin
+              username_parameter: email
+              password_parameter: password
+              csrf_parameter:       token
+              csrf_token_id:        authenticate
+
+            logout:
+              path: /logout
+              target: /
             # activate different ways to authenticate
 
             # http_basic: ~

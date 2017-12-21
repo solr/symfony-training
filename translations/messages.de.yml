@@ -1,0 +1,2 @@
+game:
+  remaining_attempts: '{1} noch einen |[2,9]Sie haben noch %count% Versuche|[10, +Inf]Locker!'

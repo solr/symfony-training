@@ -11,6 +11,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="players")
  * @UniqueEntity(fields={"email"}, message="Email in use")
  */
-class Player
+class Player implements UserInterface
 {
     /**
      * @var int
@@ -134,4 +135,26 @@ class Player
     {
         $this->birthday = $birthday;
     }
+
+    public function getRoles()
+    {
+        return ['ROLE_PLAYER'];
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+
 }

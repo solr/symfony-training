@@ -8,7 +8,7 @@
     <h2>Guess the mysterious word</h2>
 
     <p class="attempts">
-        You still have {{ game.remainingAttempts }} remaining attempts.
+        {{ 'game.remaining_attempts'|transchoice(game.remainingAttempts) }}
     </p>
     <ul class="word_letters">
         {% for letter in game.wordLetters %}

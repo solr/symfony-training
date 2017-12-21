@@ -13,17 +13,27 @@
             <div id="menu">
                 <ul>
                     <li class="first current_page_item">
-                        <a href="/game/">Game</a>
+                        <a href="{{ path('app_game') }}">Game</a>
                     </li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_signout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('app_register') }}">Register</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_signin') }}">Login</a>
+                        </li>
+                    {% endif %}
                     <li>
-                        <a href="/signup">Register</a>
+                        <a href="">Contact</a>
                     </li>
-                    <li>
-                        <a href="/signin">Login</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+
                 </ul>
                 <br class="clearfix" />
             </div>
@@ -31,7 +41,9 @@
 
         <div id="page">
             <div id="content">
-
+                    {% for message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
                 {% block content %} {% endblock %}
 
             </div>

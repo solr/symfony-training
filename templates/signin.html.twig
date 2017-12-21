@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Sign In ' ~ parent() %}
+
+{% block content %}
+    <h2>Sign in</h2>
+    {% if error %}
+        <div class="alert alert-danger">Falscher Login</div>
+    {% endif %}
+    <form action="{{ path('app_signin') }}" method="post">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{ last_username }}" />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" value="" />
+        </div>
+        <input type="hidden" name="token" value="{{ csrf_token('authenticate') }}">
+        <div>
+            <button type="submit">Sign In</button>
+        </div>
+    </form>
+{% endblock %}
+

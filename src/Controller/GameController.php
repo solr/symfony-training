@@ -5,9 +5,15 @@ namespace App\Controller;
 use App\Game\GameRunner;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class GameController
+ * @package App\Controller
+ * @Security("has_role('ROLE_PLAYER')")
+ */
 class GameController extends Controller
 {
     /**
